@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var chalk = require("chalk");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -61,8 +62,8 @@ function buy() {
                         console.log("\n" + res[i].id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity + "\n")
                         chosenItem = res[i];
                     }
-                    if (answer.quantity < chosenItem.stock_quantity) {
-                        connection.query("UPDATE products SET ? WHERE ?"),
+                    if (answer.quantity <= chosenItem.stock_quantity) {
+                        connection.query("UPDATE products SET ? WHERE ?",
                             [
                                 {
                                     stock_quantity: chosenItem.stock_quantity - answer.quantity
@@ -70,11 +71,12 @@ function buy() {
                                 {
                                     id: chosenItem.id
                                 }
-                            ];
-                        console.log("\n Order completed. Please pay: " + (answer.quantity*chosenItem.price)+ "\n")
+                            ]);
+                        console.log(chalk.green("\n Order completed. Please pay: " + (answer.quantity * chosenItem.price) + "\n"));
+                        queryDB();
                     }
                     else {
-                        console.log("\n Insufficient quantity. Try again! \n")
+                        console.log(chalk.red("\n Insufficient quantity. Try again! \n"));
                         queryDB();
                     }
                 })
