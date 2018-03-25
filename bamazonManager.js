@@ -78,7 +78,7 @@ function addInventory() {
                 message: "What item would you like to add inventory to?",
                 name: "add",
                 validate: function (value) {
-                    if (isNaN(value) === false && value < 11) {
+                    if (isNaN(value) === false) {
                         return true;
                     }
                     return false;
@@ -89,7 +89,7 @@ function addInventory() {
                 message: "How many would you like to add?",
                 name: "quantity",
                 validate: function (value) {
-                    if (isNaN(value) === false && value < 11) {
+                    if (isNaN(value) === false) {
                         return true;
                     }
                     return false;
@@ -118,5 +118,9 @@ function addInventory() {
                 }
             )
         })
+}
+
+function newProduct() {
+    
 }
 

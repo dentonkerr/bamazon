@@ -36,7 +36,7 @@ function buy() {
                 message: "What is the ID of the product you would like to buy?",
                 name: "id",
                 validate: function (value) {
-                    if (isNaN(value) === false && value < 11) {
+                    if (isNaN(value) === false) {
                         return true;
                     }
                     return false;
